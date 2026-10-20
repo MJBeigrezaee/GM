@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="theme-color" content="#173650" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" type="image/png" sizes="192x192" href="./assets/icon-192.png" />
+  <link rel="apple-touch-icon" href="./assets/icon-192.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Kontrolkort Online – Mikrorør DIN Ø12×2 mm | GM Plast A/S</title>
+  <style>
+    :root {
+      --green: #16a34a;
+      --yellow: #ca8a04;
+      --red: #dc2626;
+      --blue: #2563eb;
+      --bg: #f1f5f9;
+      --card: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #cbd5e1;
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.4;
+      padding: 0;
+      padding-bottom: calc(80px + var(--safe-bottom));
+      font-size: 16px;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      background: var(--card);
+      min-height: 100vh;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1e40af, #3b82f6);
+      color: white;
+      padding: 16px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    header h1 { font-size: 1.15rem; font-weight: 700; margin-bottom: 2px; }
+    header .sub { font-size: 0.8rem; opacity: 0.9; }
+
+    .header-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      min-height: 48px;
+      transition: opacity 0.15s;
+    }
+    button:active { opacity: 0.85; }
+
+    .btn-secondary { background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.3); }
+    .btn-add {
+      background: #2563eb;
+      color: white;
+      width: 100%;
+      font-size: 1.05rem;
+      padding: 16px;
+      margin-top: 8px;
+    }
+    .btn-print { background: #7c3aed; color: white; }
+    .btn-danger-sm {
+      background: #fee2e2;
+      color: #dc2626;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      min-height: 32px;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .section {
+      padding: 16px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .section-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #1e40af;
+      margin-bottom: 12px;
+    }
+
+    .field { margin-bottom: 14px; }
+
+    .field label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #475569;
+      margin-bottom: 4px;
+    }
+
+    .field .en {
+      font-weight: 400;
+      color: #94a3b8;
+      font-size: 0.75rem;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    input[type="time"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 14px 12px;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      font-size: 1.05rem;
+      background: #f8fafc;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #3b82f6;
+      background: white;
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+    }
+
+    input[inputmode="decimal"],
+    input[type="number"] {
+      font-variant-numeric: tabular-nums;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    @media (max-width: 480px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      .grid-2.split { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* Order summary */
+    .order-summary {
+      background: #eff6ff;
+      border: 2px solid #bfdbfe;
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 16px;
+    }
+
+    .order-summary .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 0;
+      font-size: 0.95rem;
+    }
+
+    .order-summary .row strong { font-size: 1.1rem; }
+
+    .progress-bar {
+      height: 10px;
+      background: #e2e8f0;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: #2563eb;
+      border-radius: 5px;
+      transition: width 0.3s;
+    }
+
+    /* Input panel */
+    .input-panel {
+      background: #f0f9ff;
+      border: 2px solid #7dd3fc;
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .input-panel h3 {
+      font-size: 1rem;
+      color: #0369a1;
+      margin-bottom: 14px;
+      font-weight: 700;
+    }
+
+    .calc-preview {
+      background: #ecfdf5;
+      border: 1px solid #6ee7b7;
+      border-radius: 10px;
+      padding: 12px;
+      margin: 12px 0;
+      font-size: 0.95rem;
+      color: #065f46;
+      display: none;
+    }
+
+    .calc-preview.visible { display: block; }
+
+    /* Checklist */
+    .check-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: white;
+      border: 2px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 12px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      min-height: 48px;
+    }
+
+    .check-item input {
+      width: 22px;
+      height: 22px;
+      accent-color: #16a34a;
+      flex-shrink: 0;
+    }
+
+    .check-item:has(input:checked) {
+      background: #f0fdf4;
+      border-color: #4ade80;
+    }
+
+    /* ===== TABLE for results ===== */
+    .table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 0 -16px;
+      padding: 0 16px;
+    }
+
+    .log-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      min-width: 720px;
+    }
+
+    .log-table th {
+      background: #1e293b;
+      color: white;
+      padding: 10px 8px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.75rem;
+      white-space: nowrap;
+      position: sticky;
+      top: 0;
+    }
+
+    .log-table td {
+      padding: 10px 8px;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+
+    .log-table tr:nth-child(even) { background: #f8fafc; }
+    .log-table tr:hover { background: #f1f5f9; }
+
+    .num {
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+    .num.green { color: var(--green); }
+    .num.yellow { color: var(--yellow); }
+    .num.red { color: var(--red); }
+
+    .status-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .status-perfect { background: #dcfce7; color: #166534; }
+    .status-warning { background: #fef9c3; color: #854d0e; }
+    .status-reject  { background: #fee2e2; color: #991b1b; }
+
+    /* Reference – horizontal compact */
+    .ref-legends {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .ref-item {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 10px 12px;
+    }
+
+    .ref-item .ref-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #334155;
+      margin-bottom: 8px;
+    }
+
+    .ref-bar {
+      display: flex;
+      height: 22px;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid #cbd5e1;
+    }
+
+    .ref-seg {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: #1e293b;
+      min-width: 0;
+    }
+
+    .ref-seg.green  { background: #4ade80; }
+    .ref-seg.yellow { background: #facc15; }
+    .ref-seg.red    { background: #f87171; }
+
+    .ref-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 4px;
+      font-size: 0.68rem;
+      color: #64748b;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .color-key {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+      font-size: 0.82rem;
+    }
+
+    .color-key span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .color-key .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+    }
+
+    footer {
+      background: #1e293b;
+      color: #94a3b8;
+      padding: 14px 16px;
+      font-size: 0.75rem;
+      text-align: center;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 24px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      border-top: 1px solid #e2e8f0;
+      padding: 10px 16px;
+      padding-bottom: calc(10px + var(--safe-bottom));
+      z-index: 40;
+      display: none;
+      box-shadow: 0 -4px 12px rgba(0,0,0,0.08);
+    }
+
+    @media (max-width: 720px) {
+      .bottom-bar { display: block; }
+    }
+
+    @media print {
+      body { background: white; padding: 0; }
+      .container { box-shadow: none; max-width: none; }
+      header { position: static; }
+      .header-actions, .no-print, .input-panel, .bottom-bar { display: none !important; }
+      .ref-seg.green, .ref-seg.yellow, .ref-seg.red {
+        -webkit-print-color-adjust: exact; print-color-adjust: exact;
+      }
+      .log-table { min-width: 0; font-size: 0.75rem; }
+    }
+  
+/* Presentation refresh */
+:root {
+  --green: #16845b;
+  --yellow: #b7791f;
+  --red: #c2413a;
+  --blue: #244b72;
+  --bg: #f3f6f9;
+  --card: #ffffff;
+  --text: #172b3a;
+  --muted: #637587;
+  --border: #dce4eb;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+* { -webkit-tap-highlight-color: transparent; }
+body {
+  background: #f3f6f9;
+  color: #172b3a;
+  line-height: 1.48;
+  font-size: 15px;
+}
+.container {
+  max-width: 1180px;
+  margin: 24px auto;
+  min-height: calc(100vh - 48px);
+  border: 1px solid #e1e8ee;
+  border-radius: 18px;
+  overflow: clip;
+  box-shadow: 0 12px 40px rgba(24, 45, 64, .07);
+}
+header {
+  background: #173650;
+  padding: 24px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  box-shadow: none;
+}
+header h1 { font-size: 1.35rem; letter-spacing: -.025em; margin: 0 0 5px; }
+header .sub { font-size: .85rem; color: #d4e0e9; opacity: 1; }
+.header-actions { margin-top: 0; align-items: center; }
+button {
+  border-radius: 9px;
+  min-height: 42px;
+  padding: 10px 14px;
+  font-size: .88rem;
+  transition: background .15s ease, transform .15s ease;
+}
+button:hover { filter: brightness(.97); }
+button:active { transform: translateY(1px); }
+.btn-secondary {
+  background: rgba(255,255,255,.09);
+  border: 1px solid rgba(255,255,255,.25);
+}
+.btn-print { background: #e8eef4; color: #173650; }
+.section { padding: 24px 28px; border-bottom: 1px solid #e8edf2; }
+.section-title {
+  color: #173650;
+  font-size: .94rem;
+  text-transform: none;
+  letter-spacing: -.01em;
+  margin-bottom: 16px;
+}
+.order-summary {
+  background: #f7fafc;
+  border: 1px solid #dce6ee;
+  border-radius: 12px;
+  padding: 15px 18px;
+  margin-bottom: 20px;
+}
+.order-summary .row { padding: 8px 0; font-size: .88rem; gap: 16px; }
+.order-summary .row strong { font-size: .98rem; color: #173650; }
+.progress-bar { height: 7px; background: #e1e8ee; margin-top: 12px; }
+.progress-fill { background: #2d7d69; }
+.field { margin-bottom: 15px; }
+.field label { color: #536779; font-size: .78rem; margin-bottom: 6px; }
+.field .en { color: #8998a5; }
+input[type="text"], input[type="number"], input[type="date"], input[type="time"],
+select, textarea {
+  border: 1px solid #ccd8e2;
+  border-radius: 8px;
+  padding: 11px 12px;
+  font-size: .95rem;
+  background: #fff;
+  color: #172b3a;
+  min-height: 43px;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: #4b789b;
+  box-shadow: 0 0 0 3px rgba(75,120,155,.12);
+}
+.input-panel {
+  background: #f8fafc;
+  border: 1px solid #dce5ed;
+  border-radius: 13px;
+  padding: 20px;
+}
+.input-panel h3 { color: #173650; font-size: .98rem; margin-bottom: 18px; }
+.btn-add {
+  background: #216b59;
+  color: #fff;
+  border-radius: 9px;
+  font-size: .95rem;
+  padding: 13px 16px;
+  margin-top: 6px;
+}
+.calc-preview {
+  background: #eef7f3;
+  border: 1px solid #c6e4d8;
+  color: #205d4c;
+}
+.check-grid { gap: 9px; }
+.check-item {
+  border: 1px solid #dce4eb;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: .84rem;
+  min-height: 44px;
+}
+.check-item:has(input:checked) { background: #eef7f2; border-color: #9acdb7; }
+.check-item input { accent-color: #216b59; }
+.table-wrap { margin: 0; padding: 0; border: 1px solid #e0e7ed; border-radius: 10px; }
+.log-table { min-width: 900px; font-size: .8rem; }
+.log-table th {
+  background: #edf2f6;
+  color: #536779;
+  font-size: .72rem;
+  text-transform: uppercase;
+  letter-spacing: .035em;
+  padding: 12px 10px;
+  position: static;
+  border-bottom: 1px solid #dce4eb;
+}
+.log-table td { padding: 12px 10px; border-bottom: 1px solid #edf1f4; }
+.log-table tr:nth-child(even) { background: #fafcfd; }
+.log-table tr:hover { background: #f2f7fa; }
+.status-badge { padding: 5px 9px; font-size: .7rem; }
+.status-perfect { background: #e1f3e9; color: #216447; }
+.status-warning { background: #fff2d6; color: #875d12; }
+.status-reject { background: #fde8e6; color: #9d302a; }
+.btn-danger-sm { width: 30px; height: 30px; min-height: 30px; }
+.ref-legends { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.ref-item { border-radius: 9px; padding: 12px; }
+.ref-bar { height: 24px; }
+.ref-seg { font-size: .62rem; }
+.color-key { color: #5b6f80; font-size: .78rem; }
+footer { background: #173650; color: #c6d4df; padding: 17px 24px; }
+.empty-state { padding: 30px 20px; }
+.bottom-bar { border-top: 1px solid #dce4eb; box-shadow: 0 -6px 20px rgba(24,45,64,.06); }
+@media (max-width: 760px) {
+  .container { margin: 0; border-radius: 0; min-height: 100vh; border: 0; }
+  header { padding: 19px 18px; align-items: flex-start; flex-direction: column; gap: 14px; }
+  header h1 { font-size: 1.12rem; }
+  .header-actions { width: 100%; }
+  .header-actions button { flex: 1; }
+  .section { padding: 20px 18px; }
+  .grid-2 { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid-2.split { grid-template-columns: 1fr 1fr; }
+  .field { min-width: 0; }
+  .input-panel { padding: 15px; }
+  .ref-legends { grid-template-columns: 1fr; }
+  .ref-seg { font-size: .65rem; }
+  .table-wrap { margin: 0; padding: 0; }
+}
+@media (max-width: 390px) {
+  .grid-2, .grid-2.split { grid-template-columns: 1fr 1fr; }
+  .section { padding-left: 14px; padding-right: 14px; }
+  .order-summary { padding: 12px; }
+}
+@media print {
+  .container { margin: 0; border: 0; border-radius: 0; }
+  body { background: #fff; }
+  .section { padding: 16px 18px; }
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <h1>Kontrolkort · Mikrorør DIN Ø12×2 mm</h1>
+        <div class="sub">GM Plast A/S · Control Card</div>
+      </div>
+      <div class="header-actions no-print">
+        <button class="btn-print" onclick="window.print()">🖨 Print</button>
+        <button class="btn-secondary" onclick="saveData()">💾 Save</button>
+        <button class="btn-secondary" onclick="clearAll()">🗑 Clear</button>
+      </div>
+    </header>
+
+    <!-- Order summary -->
+    <div class="section">
+      <div class="section-title">📦 Order / Bestilling</div>
+      <div class="order-summary">
+        <div class="row">
+          <span>Bestilt mængde / Ordered</span>
+          <strong>5 × 4100 m</strong>
+        </div>
+        <div class="row">
+          <span>Expected Tromler / Forventet</span>
+          <strong>5</strong>
+        </div>
+        <div class="row">
+          <span>Registered / Registreret</span>
+          <strong id="registeredDisplay">0 / 5</strong>
+        </div>
+        <div class="row">
+          <span>Sample length / Prøvelængde</span>
+          <strong>1 m</strong>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill" style="width:0%"></div>
+        </div>
+      </div>
+
+      <div class="grid-2 split">
+        <div class="field">
+          <label>Job nr. <span class="en">/ Job no.</span></label>
+          <input type="text" id="jobNr" value="28671" autocomplete="off" />
+        </div>
+        <div class="field">
+          <label>Linje <span class="en">/ Line</span></label>
+          <input type="text" id="linje" value="1" inputmode="numeric" />
+        </div>
+        <div class="field">
+          <label>Batch</label>
+          <input type="text" id="batch" value="020" autocomplete="off" />
+        </div>
+        <div class="field">
+          <label>Dato <span class="en">/ Date</span></label>
+          <input type="date" id="dato" value="2026-09-16" />
+        </div>
+        <div class="field">
+          <label>Beskrivelse <span class="en">/ Description</span></label>
+          <input type="text" id="beskrivelse" value="PXL NATURAL ORANGE" />
+        </div>
+        <div class="field">
+          <label>Tekst farve <span class="en">/ Text colour</span></label>
+          <input type="text" id="tekstFarve" value="ORANGE" />
+        </div>
+        <div class="field">
+          <label>UV %</label>
+          <input type="number" id="uv" step="0.1" value="2" inputmode="decimal" />
+        </div>
+        <div class="field">
+          <label>Råvare 1 <span class="en">/ Raw material</span></label>
+          <input type="text" id="ravare1" value="LITEN" />
+        </div>
+        <div class="field">
+          <label>Riller (stk)</label>
+          <input type="number" id="riller" value="60" inputmode="numeric" />
+        </div>
+        <div class="field">
+          <label>Kugle kalibrering</label>
+          <input type="number" id="kugle" value="70" inputmode="numeric" />
+        </div>
+      </div>
+    </div>
+
+    <!-- ADD TROMLE -->
+    <div class="section no-print">
+      <div class="section-title">＋ New Tromle measurement</div>
+      <div class="input-panel">
+        <h3>1 m sample after drum is filled</h3>
+
+        <div class="grid-2 split">
+          <div class="field">
+            <label>Tromle nr. <span class="en">/ Drum no.</span></label>
+            <input type="text" id="inTromleNr" placeholder="1001" autocomplete="off" />
+          </div>
+          <div class="field">
+            <label>Tromle længde (m) <span class="en">/ Drum length</span></label>
+            <input type="number" id="inLaengde" step="1" placeholder="4100" inputmode="numeric" value="4100" />
+          </div>
+        </div>
+
+        <div class="grid-2 split">
+          <div class="field">
+            <label>Dato</label>
+            <input type="date" id="inDato" />
+          </div>
+          <div class="field">
+            <label>Tid <span class="en">/ Time</span></label>
+            <input type="time" id="inTid" />
+          </div>
+        </div>
+
+        <div class="grid-2 split">
+          <div class="field">
+            <label>Min. diameter (mm)</label>
+            <input type="number" id="inMinDia" step="0.01" placeholder="12.00" inputmode="decimal" />
+          </div>
+          <div class="field">
+            <label>Max. diameter (mm)</label>
+            <input type="number" id="inMaxDia" step="0.01" placeholder="12.05" inputmode="decimal" />
+          </div>
+        </div>
+
+        <div class="grid-2 split">
+          <div class="field">
+            <label>Min. godstykkelse (mm)</label>
+            <input type="number" id="inMinWall" step="0.01" placeholder="2.00" inputmode="decimal" />
+          </div>
+          <div class="field">
+            <label>Max. godstykkelse (mm)</label>
+            <input type="number" id="inMaxWall" step="0.01" placeholder="2.07" inputmode="decimal" />
+          </div>
+        </div>
+
+        <div class="grid-2 split">
+          <div class="field">
+            <label>Metermarkering</label>
+            <input type="number" id="inMeter" placeholder="1000" inputmode="numeric" />
+          </div>
+          <div class="field">
+            <label>Spild (m) <span class="en">/ Waste</span></label>
+            <input type="number" id="inSpild" step="0.1" value="0" inputmode="decimal" />
+          </div>
+        </div>
+
+        <div class="calc-preview" id="calcPreview">
+          <div>Gennemsnit / Average: <strong id="prevAvg">—</strong></div>
+          <div>Ovalitet / Ovality: <strong id="prevOval">—</strong></div>
+        </div>
+
+        <div class="field">
+          <label>Checklist</label>
+          <div class="check-grid">
+            <label class="check-item"><input type="checkbox" id="inRiller" /> Riller</label>
+            <label class="check-item"><input type="checkbox" id="inTekst" /> Tekst</label>
+            <label class="check-item"><input type="checkbox" id="inStriber" /> Striber</label>
+            <label class="check-item"><input type="checkbox" id="inKugle" /> Kugletest</label>
+            <label class="check-item"><input type="checkbox" id="inTryk" /> Tryktest</label>
+            <label class="check-item"><input type="checkbox" id="inRidser" /> Ingen ridser</label>
+            <label class="check-item"><input type="checkbox" id="inStreg" /> Stregkode</label>
+            <label class="check-item"><input type="checkbox" id="inKvalitet" /> Kvalitet</label>
+            <label class="check-item"><input type="checkbox" id="inGodkendt" /> Godkendt</label>
+          </div>
+        </div>
+
+        <div class="grid-2 split">
+          <div class="field">
+            <label>Medarbejder 1</label>
+            <input type="text" id="inMed1" placeholder="Name" autocomplete="name" />
+          </div>
+          <div class="field">
+            <label>Medarbejder 2</label>
+            <input type="text" id="inMed2" placeholder="Name" autocomplete="name" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Bemærkninger</label>
+          <input type="text" id="inNotes" placeholder="Notes..." />
+        </div>
+
+        <button class="btn-add" onclick="addMeasurement()">＋ Add Tromle</button>
+      </div>
+    </div>
+
+    <!-- Registered Tromler – TABLE -->
+    <div class="section">
+      <div class="section-title">📋 Registered Tromler · Results</div>
+      <div class="table-wrap">
+        <table class="log-table" id="logTable">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Tromle nr.</th>
+              <th>Dato / Tid</th>
+              <th>Længde</th>
+              <th>Min Ø</th>
+              <th>Max Ø</th>
+              <th>Gns. Ø</th>
+              <th>Ovalitet</th>
+              <th>Min wall</th>
+              <th>Max wall</th>
+              <th>Status</th>
+              <th class="no-print"></th>
+            </tr>
+          </thead>
+          <tbody id="logBody">
+          </tbody>
+        </table>
+      </div>
+      <div class="empty-state" id="emptyMsg" style="display:none;">No Tromler registered yet.</div>
+    </div>
+
+    <!-- Spolekvalitet -->
+    <div class="section">
+      <div class="section-title">🌀 Spolekvalitet · Coil quality</div>
+      <div class="check-grid">
+        <label class="check-item"><input type="radio" name="spole" value="perfekt" checked /> ✅ Perfekt</label>
+        <label class="check-item"><input type="radio" name="spole" value="okay" /> 🟡 Okay</label>
+        <label class="check-item"><input type="radio" name="spole" value="darligt" /> 🔴 Dårligt</label>
+        <label class="check-item"><input type="radio" name="spole" value="tilbagehold" /> ⚠ Tilbagehold</label>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">📝 Bemærkninger · Notes</div>
+      <textarea id="finalNotes" rows="2" placeholder="Notes for supervisor..."></textarea>
+    </div>
+
+    <!-- REFERENCE – horizontal compact -->
+    <div class="section">
+      <div class="section-title">🎨 Reference tolerances · Reference</div>
+      <div class="ref-legends">
+        <div class="ref-item">
+          <div class="ref-title">Diameter / Gennemsnit (mm)</div>
+          <div class="ref-bar">
+            <div class="ref-seg red">11.95</div>
+            <div class="ref-seg yellow">12.00</div>
+            <div class="ref-seg green">12.01–12.05</div>
+            <div class="ref-seg yellow">12.07–12.09</div>
+            <div class="ref-seg red">12.10+</div>
+          </div>
+          <div class="ref-labels">
+            <span>← low</span>
+            <span>Perfect zone</span>
+            <span>high →</span>
+          </div>
+        </div>
+
+        <div class="ref-item">
+          <div class="ref-title">Ovalitet (mm)</div>
+          <div class="ref-bar">
+            <div class="ref-seg green">0.00–0.06</div>
+            <div class="ref-seg yellow">0.08–0.10</div>
+            <div class="ref-seg red">0.12+</div>
+          </div>
+          <div class="ref-labels">
+            <span>Perfect</span>
+            <span>Allowed</span>
+            <span>Action</span>
+          </div>
+        </div>
+
+        <div class="ref-item">
+          <div class="ref-title">Godstykkelse min / max (mm)</div>
+          <div class="ref-bar">
+            <div class="ref-seg red">1.90</div>
+            <div class="ref-seg yellow">1.99</div>
+            <div class="ref-seg green">2.00–2.07</div>
+            <div class="ref-seg yellow">2.10–2.15</div>
+            <div class="ref-seg red">2.20+</div>
+          </div>
+          <div class="ref-labels">
+            <span>← low</span>
+            <span>Perfect zone</span>
+            <span>high →</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="color-key">
+        <span><div class="dot" style="background:#4ade80;"></div> Perfect / God</span>
+        <span><div class="dot" style="background:#facc15;"></div> Tilladt afvigelse / Allowed</span>
+        <span><div class="dot" style="background:#f87171;"></div> Handling kræves / Action required</span>
+      </div>
+    </div>
+
+    <footer>
+      Kontrolkort Online · Mobile optimised · GM Plast A/S · Dokument 6.4.2.2<br>
+      Sample = 1 m · Expected: 5 Tromler × 4100 m
+    </footer>
+  </div>
+
+  <div class="bottom-bar no-print">
+    <button class="btn-add" style="margin:0;" onclick="document.querySelector('.input-panel').scrollIntoView({behavior:'smooth'})">＋ Add Tromle</button>
+  </div>
+
+  <script>
+    const EXPECTED_TROMLER = 5;
+
+    // Pre-filled from paper form
+    let measurements = [
+      { id:1, tromleNr:'1001', dato:'2026-09-16', tid:'08:30', laengde:'4100', spild:'0', meter:1000,
+        minDia:12.01, maxDia:12.05, avg:12.030, ovalitet:0.040, minWall:2.00, maxWall:2.07 },
+      { id:2, tromleNr:'1002', dato:'2026-09-16', tid:'09:15', laengde:'4100', spild:'0', meter:1001,
+        minDia:12.00, maxDia:12.07, avg:12.035, ovalitet:0.070, minWall:2.05, maxWall:2.10 },
+      { id:3, tromleNr:'1003', dato:'2026-09-16', tid:'10:00', laengde:'4100', spild:'0', meter:1002,
+        minDia:12.03, maxDia:12.09, avg:12.060, ovalitet:0.060, minWall:2.00, maxWall:2.07 },
+      { id:4, tromleNr:'1004', dato:'2026-09-16', tid:'10:45', laengde:'4100', spild:'0', meter:1003,
+        minDia:12.01, maxDia:12.05, avg:12.030, ovalitet:0.040, minWall:2.05, maxWall:2.10 },
+      { id:5, tromleNr:'1005', dato:'2026-09-16', tid:'11:30', laengde:'4100', spild:'0', meter:1004,
+        minDia:12.07, maxDia:12.10, avg:12.085, ovalitet:0.030, minWall:2.00, maxWall:2.07 },
+      { id:6, tromleNr:'1006', dato:'2026-09-16', tid:'12:15', laengde:'4100', spild:'0', meter:1005,
+        minDia:12.03, maxDia:12.07, avg:12.050, ovalitet:0.040, minWall:2.05, maxWall:2.10 }
+    ];
+    let nextId = 7;
+
+    function getColor(value, type) {
+      if (value === null || isNaN(value)) return '';
+      if (type === 'diameter' || type === 'avg') {
+        if (value < 12.00 || value > 12.09) return 'red';
+        if (value < 12.01 || value > 12.07) return 'yellow';
+        return 'green';
+      }
+      if (type === 'ovalitet') {
+        if (value <= 0.06) return 'green';
+        if (value <= 0.10) return 'yellow';
+        return 'red';
+      }
+      if (type === 'wall') {
+        if (value < 2.00 || value > 2.15) return 'red';
+        if (value < 2.05 || value > 2.10) return 'yellow';
+        return 'green';
+      }
+      return '';
+    }
+
+    function overallStatus(m) {
+      const colors = [
+        getColor(m.minDia, 'diameter'), getColor(m.maxDia, 'diameter'),
+        getColor(m.avg, 'avg'), getColor(m.ovalitet, 'ovalitet'),
+        getColor(m.minWall, 'wall'), getColor(m.maxWall, 'wall')
+      ];
+      if (colors.includes('red')) return { text: 'Action required', cls: 'status-reject' };
+      if (colors.includes('yellow')) return { text: 'Allowed', cls: 'status-warning' };
+      return { text: 'Perfect', cls: 'status-perfect' };
+    }
+
+    function updateProgress() {
+      const count = measurements.length;
+      document.getElementById('registeredDisplay').textContent = count + ' / ' + EXPECTED_TROMLER;
+      const pct = Math.min(100, (count / EXPECTED_TROMLER) * 100);
+      document.getElementById('progressFill').style.width = pct + '%';
+      document.getElementById('progressFill').style.background = count >= EXPECTED_TROMLER ? '#16a34a' : '#2563eb';
+    }
+
+    function renderLog() {
+      const tbody = document.getElementById('logBody');
+      const empty = document.getElementById('emptyMsg');
+      tbody.innerHTML = '';
+
+      if (measurements.length === 0) {
+        empty.style.display = 'block';
+        updateProgress();
+        return;
+      }
+      empty.style.display = 'none';
+
+      measurements.forEach(function(m, i) {
+        const st = overallStatus(m);
+        const cMin = getColor(m.minDia, 'diameter');
+        const cMax = getColor(m.maxDia, 'diameter');
+        const cAvg = getColor(m.avg, 'avg');
+        const cOval = getColor(m.ovalitet, 'ovalitet');
+        const cMinW = getColor(m.minWall, 'wall');
+        const cMaxW = getColor(m.maxWall, 'wall');
+
+        const tr = document.createElement('tr');
+        tr.innerHTML =
+          '<td><strong>' + (i + 1) + '</strong></td>' +
+          '<td><strong>' + m.tromleNr + '</strong></td>' +
+          '<td>' + (m.dato || '') + ' ' + (m.tid || '') + '</td>' +
+          '<td>' + (m.laengde || '—') + ' m</td>' +
+          '<td class="num ' + cMin + '">' + m.minDia.toFixed(2) + '</td>' +
+          '<td class="num ' + cMax + '">' + m.maxDia.toFixed(2) + '</td>' +
+          '<td class="num ' + cAvg + '">' + m.avg.toFixed(3) + '</td>' +
+          '<td class="num ' + cOval + '">' + m.ovalitet.toFixed(3) + '</td>' +
+          '<td class="num ' + cMinW + '">' + (m.minWall !== null ? m.minWall.toFixed(2) : '—') + '</td>' +
+          '<td class="num ' + cMaxW + '">' + (m.maxWall !== null ? m.maxWall.toFixed(2) : '—') + '</td>' +
+          '<td><span class="status-badge ' + st.cls + '">' + st.text + '</span></td>' +
+          '<td class="no-print"><button class="btn-danger-sm" onclick="removeMeasurement(' + m.id + ')">✕</button></td>';
+        tbody.appendChild(tr);
+      });
+      updateProgress();
+    }
+
+    function addMeasurement() {
+      const minDia = parseFloat(document.getElementById('inMinDia').value);
+      const maxDia = parseFloat(document.getElementById('inMaxDia').value);
+      const minWall = parseFloat(document.getElementById('inMinWall').value);
+      const maxWall = parseFloat(document.getElementById('inMaxWall').value);
+
+      if (isNaN(minDia) || isNaN(maxDia)) {
+        alert('Please enter Min and Max diameter.');
+        document.getElementById('inMinDia').focus();
+        return;
+      }
+
+      const avg = (minDia + maxDia) / 2;
+      const ovalitet = maxDia - minDia;
+
+      const m = {
+        id: nextId++,
+        tromleNr: document.getElementById('inTromleNr').value || String(1000 + nextId),
+        dato: document.getElementById('inDato').value,
+        tid: document.getElementById('inTid').value,
+        laengde: document.getElementById('inLaengde').value || '4100',
+        spild: document.getElementById('inSpild').value,
+        meter: parseFloat(document.getElementById('inMeter').value) || null,
+        minDia: minDia, maxDia: maxDia, avg: avg, ovalitet: ovalitet,
+        minWall: isNaN(minWall) ? null : minWall,
+        maxWall: isNaN(maxWall) ? null : maxWall
+      };
+
+      measurements.push(m);
+      renderLog();
+      clearInputForm();
+    }
+
+    function clearInputForm() {
+      document.getElementById('inTromleNr').value = '';
+      document.getElementById('inMinDia').value = '';
+      document.getElementById('inMaxDia').value = '';
+      document.getElementById('inMinWall').value = '';
+      document.getElementById('inMaxWall').value = '';
+      document.getElementById('inMeter').value = '';
+      document.getElementById('inSpild').value = '0';
+      document.getElementById('inMed1').value = '';
+      document.getElementById('inMed2').value = '';
+      document.getElementById('inNotes').value = '';
+      document.getElementById('inLaengde').value = '4100';
+      document.querySelectorAll('.input-panel input[type="checkbox"]').forEach(function(c) { c.checked = false; });
+      document.getElementById('calcPreview').classList.remove('visible');
+    }
+
+    function removeMeasurement(id) {
+      if (!confirm('Remove this Tromle?')) return;
+      measurements = measurements.filter(function(m) { return m.id !== id; });
+      renderLog();
+    }
+
+    function clearAll() {
+      if (!confirm('Clear ALL measurements?')) return;
+      measurements = [];
+      nextId = 1;
+      renderLog();
+    }
+
+    function updatePreview() {
+      const minDia = parseFloat(document.getElementById('inMinDia').value);
+      const maxDia = parseFloat(document.getElementById('inMaxDia').value);
+      const box = document.getElementById('calcPreview');
+      if (!isNaN(minDia) && !isNaN(maxDia)) {
+        document.getElementById('prevAvg').textContent = ((minDia + maxDia) / 2).toFixed(3) + ' mm';
+        document.getElementById('prevOval').textContent = (maxDia - minDia).toFixed(3) + ' mm';
+        box.classList.add('visible');
+      } else {
+        box.classList.remove('visible');
+      }
+    }
+
+    document.getElementById('inMinDia').addEventListener('input', updatePreview);
+    document.getElementById('inMaxDia').addEventListener('input', updatePreview);
+
+    function saveData() {
+      const data = {
+        header: {
+          jobNr: document.getElementById('jobNr').value,
+          linje: document.getElementById('linje').value,
+          batch: document.getElementById('batch').value,
+          dato: document.getElementById('dato').value,
+          beskrivelse: document.getElementById('beskrivelse').value,
+          tekstFarve: document.getElementById('tekstFarve').value,
+          uv: document.getElementById('uv').value,
+          ravare1: document.getElementById('ravare1').value,
+          riller: document.getElementById('riller').value,
+          kugle: document.getElementById('kugle').value,
+          finalNotes: document.getElementById('finalNotes').value,
+          spole: document.querySelector('input[name="spole"]:checked') ? document.querySelector('input[name="spole"]:checked').value : null
+        },
+        measurements: measurements
+      };
+      localStorage.setItem('kontrolkort_mobile', JSON.stringify(data));
+      alert('Saved.');
+    }
+
+
+    function loadData() {
+      try {
+        const raw = localStorage.getItem('kontrolkort_mobile');
+        if (!raw) return;
+        const data = JSON.parse(raw);
+        const header = data.header || {};
+        const fields = {
+          jobNr: 'jobNr', linje: 'linje', batch: 'batch', dato: 'dato',
+          beskrivelse: 'beskrivelse', tekstFarve: 'tekstFarve', uv: 'uv',
+          ravare1: 'ravare1', riller: 'riller', kugle: 'kugle', finalNotes: 'finalNotes'
+        };
+        Object.keys(fields).forEach(key => {
+          const el = document.getElementById(fields[key]);
+          if (el && header[key] !== undefined && header[key] !== null) el.value = header[key];
+        });
+        if (header.spole) {
+          const radio = document.querySelector('input[name="spole"][value="' + header.spole + '"]');
+          if (radio) radio.checked = true;
+        }
+        if (Array.isArray(data.measurements)) {
+          measurements = data.measurements;
+          nextId = measurements.reduce((max, m) => Math.max(max, Number(m.id) || 0), 0) + 1;
+        }
+      } catch (e) {}
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      loadData();
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('inDato').value = today;
+      const now = new Date();
+      document.getElementById('inTid').value = now.toTimeString().slice(0,5);
+      renderLog();
+    });
+  </script>
+
+  <script>
+    if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1')) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
+    }
+  </script>
+</body>
+</html>
